@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RDR2 UI — Torn Pause Menu (Western Font)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <button id="menuToggle" class="btn"><span class="icon-burger"><span></span></span><span>Menu</span></button>
+  </div>
+
+  <div id="backdrop" class="backdrop" hidden></div>
+
+  <aside id="mainMenu" class="menu" aria-hidden="true">
+    <div class="menu-shell">
+      <div class="menu-panel">
+        <div class="menu-inner">
+          <header class="menu-header"><div class="brand"></div></header>
+
+          <!-- Pocket watch -->
+          <div class="watch" aria-hidden="true">
+            <div class="watch-face">
+              <div class="ticks"></div>
+              <div class="hand hour"></div>
+              <div class="hand minute"></div>
+              <div class="hand second"></div>
+              <div class="pin"></div>
+            </div>
+            <div class="watch-label">AM</div>
+          </div>
+
+          <nav>
+            <ul>
+              <li><a class="menu-item" href="#map">ROAD MAP</a></li>
+              <li><a class="menu-item" href="#help">HELP</a></li>
+              <li><a class="menu-item" href="#progress">PROGRESS</a></li>
+              <li><a class="menu-item" href="#player">PLAYER</a></li>
+              <li><a class="menu-item" href="#settings">CALENDAR</a></li>
+            </ul>
+          </nav>
+          <footer class="menu-footer">RDR2</footer>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="scene" class="scene">
+    <section class="hero">
+      <div>
+        <h1>"RDR2 Menu"</h1>
+        <p>with personal hub</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- === MAP PAGE === -->
+  <div id="mapPage" class="page map" hidden>
+    <div class="page-chrome">
+      <button id="mapBack" class="btn-back" aria-label="Back">◀ Back</button>
+      <div class="title">ROAD MAP</div>
+    </div>
+
+    <div class="page-inner">
+      <div class="map-canvas" aria-hidden="true"></div>
+    </div>
+
+    <!-- checklist persis di bawah map -->
+   <!-- checklist persis di bawah map -->
+      <!-- checklist persis di bawah map -->
+    <section id="activities">
+      <h2>Mata Kuliah diambil</h2>
+
+      <!-- Form tambah item -->
+      <form id="todoForm" class="todo-controls" autocomplete="off">
+        <input id="todoInput" type="text" placeholder="Tambah Mata Kuliah (Enter untuk tambah)" required />
+        <button type="submit" class="btn">Tambah</button>
+        <button type="button" id="todoClear" class="btn" title="Hapus yang sudah selesai">Hapus yang Selesai</button>
+        <span id="todoStats" class="hint"></span>
+      </form>
+
+      <!-- Daftar checklist render -->
+      <ul id="todoList" class="todo-list" aria-live="polite"></ul>
+    </section>
+
+  </div>
+
+  <!-- === HELP PAGE === -->
+  <div id="helpPage" class="page help" hidden>
+  <div class="page-chrome">
+    <button id="helpBack" class="btn-back" aria-label="Back">◀ Back</button>
+    <div class="title">HELP</div>
+  </div>
+
+  <div class="page-inner">
+    <!-- Controls (tambah link) -->
+    <form id="helpForm" class="help-controls" autocomplete="off">
+      <div class="row">
+        <label>
+          <span>Judul</span>
+          <input id="hfTitle" type="text" placeholder="Nama link" required />
+        </label>
+        <label>
+          <span>Tag</span>
+          <input id="hfTag" type="text" placeholder="Materi / Tugas / Kontak / News" />
+        </label>
+      </div>
+      <div class="row">
+        <label class="grow">
+          <span>URL</span>
+          <input id="hfUrl" type="url" placeholder="https://example.com" required />
+        </label>
+      </div>
+      <div class="row">
+        <label class="grow">
+          <span>Deskripsi</span>
+          <textarea id="hfDesc" rows="2" placeholder="Keterangan singkat (opsional)"></textarea>
+        </label>
+      </div>
+      <div class="actions">
+        <button type="submit" class="btn">Tambah</button>
+        <button type="button" id="hfReset" class="btn" title="Reset ke default (opsional)">Reset Default</button>
+        <span class="hint">Auto-save ke browser. Data nempel di device ini aja.</span>
+      </div>
+    </form>
+
+    <!-- Daftar kartu hasil render -->
+    <div class="help-grid" id="helpList"></div>
+  </div>
+</div>
+
+<!-- === PROGRESS PAGE === -->
+<div id="progressPage" class="page progress" hidden>
+  <div class="page-chrome">
+    <button id="progressBack" class="btn-back" aria-label="Back">◀ Back</button>
+    <div class="title">PROGRESS</div>
+  </div>
+
+  <div class="page-inner">
+    <!-- ===== META (Semester & Bars) ===== -->
+    <section class="progress-meta card">
+      <h2>Semester & Bars</h2>
+
+      <div class="row">
+        <label>
+          <span>Semester Saat Ini</span>
+          <input id="pmSemester" type="number" min="1" step="1" placeholder="1" />
+        </label>
+      </div>
+
+      <div class="row g2">
+        <label class="grow">
+          <span>Progress Semester (%)</span>
+          <input id="pmSemPct" type="range" min="0" max="100" step="1" />
+          <div class="bar">
+            <div class="bar-fill" id="barSemPct" style="width:0%"></div>
+          </div>
+          <div class="tiny" id="pmSemPctLabel">0%</div>
+        </label>
+
+        <label class="grow">
+          <span>SKS Terpenuhi / Target</span>
+          <div class="sks-inputs">
+            <input id="pmSksDone"   type="number" min="0" step="1" placeholder="0" />
+            <span>/</span>
+            <input id="pmSksTarget" type="number" min="1" step="1" placeholder="144" />
+          </div>
+          <div class="bar">
+            <div class="bar-fill" id="barSksPct" style="width:0%"></div>
+          </div>
+          <div class="tiny"><span id="pmSksPctLabel">0%</span></div>
+        </label>
+      </div>
+    </section>
+
+    <!-- ===== IP TRACKER ===== -->
+    <section class="progress-ip card">
+      <div class="hdr">
+        <h2>Tracker IP</h2>
+        <div class="ipk-box">
+          <div class="ipk-line">Total SKS: <strong id="ipTotalSks">0</strong></div>
+          <div class="ipk-line">IPK (weighted): <strong id="ipIpk">0.00</strong></div>
+        </div>
+      </div>
+
+      <form id="ipForm" class="ip-form" autocomplete="off">
+        <label>
+          <span>Semester</span>
+          <input id="ipSem" type="number" min="1" step="1" placeholder="1" />
+        </label>
+        <label>
+          <span>SKS</span>
+          <input id="ipSks" type="number" min="1" step="1" required />
+        </label>
+        <label>
+          <span>IP (0–4)</span>
+          <input id="ipVal" type="number" min="0" max="4" step="0.01" required />
+        </label>
+        <button type="submit" class="btn">Tambah</button>
+        <button type="button" id="ipClear" class="btn" title="Hapus semua entri">Bersihkan</button>
+      </form>
+
+      <div class="table-wrap">
+        <table class="ip-table">
+          <thead>
+            <tr>
+              <th>Semester</th><th>SKS</th><th>IP</th><th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="ipTbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- === SETTINGS / CALENDAR PAGE === -->
+<div id="settingsPage" class="page settings" hidden>
+  <div class="page-chrome">
+    <button id="settingsBack" class="btn-back" aria-label="Back">◀ Back</button>
+    <div class="title">SETTINGS — CALENDAR</div>
+  </div>
+
+  <div class="page-inner">
+    <!-- TOP BAR: month nav + prefs -->
+    <section class="cal-toolbar card">
+      <div class="left">
+        <button id="calPrev" class="btn-small">‹</button>
+        <div id="calMonthLabel" class="cal-month-label">Month YYYY</div>
+        <button id="calNext" class="btn-small">›</button>
+        <button id="calToday" class="btn-small">Today</button>
+      </div>
+      <div class="right">
+        <select id="calCategoryFilter" title="Filter kategori">
+          <option value="">All</option>
+          <option value="kuliah">Kuliah</option>
+          <option value="tugas">Tugas</option>
+          <option value="pribadi">Pribadi</option>
+          <option value="lain">Lain</option>
+        </select>
+        <label class="inline">
+          <input id="calHideDone" type="checkbox" />
+          <span>Hide done</span>
+        </label>
+        <select id="calTheme" title="Theme">
+          <option value="classic">Classic</option>
+          <option value="blood">Blood</option>
+          <option value="sand">Sand</option>
+        </select>
+        <button id="calExport" class="btn-small">Export</button>
+        <label class="btn-small filelike">
+          Import
+          <input id="calImport" type="file" accept="application/json" hidden />
+        </label>
+        <button id="calNotif" class="btn-small" title="Aktifkan notifikasi">Notif</button>
+      </div>
+    </section>
+
+    <!-- FORM TAMBAH/EDIT -->
+    <section class="cal-form card">
+      <form id="eventForm" autocomplete="off">
+        <input type="hidden" id="evId" />
+        <div class="row">
+          <label class="grow">
+            <span>Judul</span>
+            <input id="evTitle" type="text" placeholder="Nama event / tugas" required />
+          </label>
+          <label>
+            <span>Kategori</span>
+            <select id="evCategory">
+              <option value="kuliah">Kuliah</option>
+              <option value="tugas">Tugas</option>
+              <option value="pribadi">Pribadi</option>
+              <option value="lain">Lain</option>
+            </select>
+          </label>
+          <label class="inline">
+            <span>Done?</span>
+            <input id="evDone" type="checkbox" />
+          </label>
+        </div>
+        <div class="row">
+          <label>
+            <span>Tanggal</span>
+            <input id="evDate" type="date" required />
+          </label>
+          <label>
+            <span>Mulai</span>
+            <input id="evStart" type="time" />
+          </label>
+          <label>
+            <span>Selesai</span>
+            <input id="evEnd" type="time" />
+          </label>
+          <label>
+            <span>Reminder (menit)</span>
+            <input id="evReminder" type="number" min="0" step="5" placeholder="0 = off" />
+          </label>
+        </div>
+        <div class="row">
+          <label class="grow">
+            <span>Catatan</span>
+            <input id="evNotes" type="text" placeholder="opsional…" />
+          </label>
+          <div class="actions">
+            <button type="submit" class="btn">Simpan</button>
+            <button type="button" id="evReset" class="btn">Clear</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- GRID + SIDEBAR -->
+    <section class="cal-layout">
+      <div class="cal-grid card" id="calGrid" aria-label="Calendar grid"></div>
+
+      <aside class="cal-side">
+        <div class="card">
+          <h3>Hari Ini</h3>
+          <ul id="listToday" class="side-list"></ul>
+        </div>
+        <div class="card">
+          <h3>Minggu Ini</h3>
+          <ul id="listWeek" class="side-list"></ul>
+        </div>
+      </aside>
+    </section>
+  </div>
+</div>
+
+  <audio id="menuSound" src="/assets/pause.mp3" preload="auto"></audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
