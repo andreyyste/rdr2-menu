@@ -1,0 +1,161 @@
+:root {
+  --ink: #0b0a09;
+  --parch: #e9dccb;
+  /* ⬇️ nambah var topbar buat perhitungan tinggi hero */
+  --topbar: 64px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+  color: var(--parch);
+  background: radial-gradient(120% 80% at 50% 0%, #15110e, #0f0c0a 60%, #0a0807 100%);
+  overflow-x: hidden;
+}
+
+/* ====== CUSTOM FONT FOR MENU (tetep) ====== */
+@font-face {
+  font-family: 'WesternBangBang';
+  src: url('assets/WesternBangBang-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+.menu-inner, 
+.menu-inner .brand, 
+.menu-inner .menu-item, 
+.menu-inner .menu-footer {
+  font-family: 'WesternBangBang', ui-serif, Georgia, serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow:
+    2px 2px 3px rgba(0, 0, 0, 0.8),
+    0 0 4px rgba(255, 255, 255, 0.25);
+}
+
+.scene {
+  min-height: 100vh;
+  position: relative;
+  transition: filter .4s ease;
+  isolation: isolate;
+}
+.scene.bw-mode { filter: grayscale(100%) contrast(1.15) brightness(.95); }
+.scene.bw-mode::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 35;
+  background:
+    radial-gradient(120% 120% at 50% 50%, transparent 55%, rgba(0,0,0,.45) 100%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 3px);
+  mix-blend-mode: multiply;
+}
+
+/* === Overlay Page Base === */
+.page{
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(10,8,7,.98);
+  display: grid; place-items: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+.page.show{ opacity:1; pointer-events:auto; }
+.page .page-chrome{
+  position: absolute; top: 14px; left: 14px; right: 14px;
+  display:flex; align-items:center; gap:12px; z-index: 1;
+}
+.page .btn-back{
+  border: 0; background: #2b211c; color: #e9dccb; 
+  padding: 8px 12px; border-radius: 10px; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.page .title{
+  font-family: 'WesternBangBang', ui-serif, Georgia, serif;
+  letter-spacing:.05em; text-transform:uppercase;
+  color:#e9dccb; opacity:.9;
+}
+
+/* ====== ROUTES (full page, bukan overlay) ====== */
+body.route-map #scene,
+body.route-map .topbar,
+body.route-map #backdrop,
+body.route-map aside.menu,
+body.route-help #scene,
+body.route-help .topbar,
+body.route-help #backdrop,
+body.route-help aside.menu {
+  display: none !important;
+}
+body.route-map #mapPage,
+body.route-help #helpPage {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  min-height: 100dvh;
+}
+body.route-map #mapPage .page-chrome,
+body.route-help #helpPage .page-chrome {
+  position: sticky;
+  top: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  z-index: 5;
+}
+body.route-map #mapPage .page-inner {
+  width: min(1400px, 96vw);
+  height: calc(100dvh - 56px);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* ==== ROUTE progress full-page ==== */
+body.route-progress #scene,
+body.route-progress .topbar,
+body.route-progress #backdrop,
+body.route-progress aside.menu {
+  display: none !important;
+}
+body.route-progress #progressPage {
+  position: static !important;
+  inset: auto !important;
+  display: block !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  min-height: 100dvh;
+}
+body.route-progress #progressPage .page-chrome{
+  position: sticky; top: 0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  z-index: 5;
+}
+
+/* ROUTE full-page */
+body.route-settings #scene,
+body.route-settings .topbar,
+body.route-settings #backdrop,
+body.route-settings aside.menu{ display:none !important; }
+body.route-settings #settingsPage{ position:static !important; display:block !important; opacity:1 !important; background:transparent !important; min-height:100dvh; }
+body.route-settings #settingsPage .page-chrome{
+  position:sticky; top:0; background:rgba(0,0,0,.55); backdrop-filter: blur(6px); z-index:5;
+}
+
+
+/* ====== FIX CENTER LANDING TANPA GANTI YG LAIN ====== */
+.hero{
+  /* pusatkan konten di area layar setelah dikurangi topbar */
+  min-height: calc(100dvh - var(--topbar));
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 24px;
+  /* geser canvas hero turun biar gak ketiban topbar */
+  margin-top: var(--topbar);
+  background-image: url('https://images.unsplash.com/photo-1508349937151-22b68b72d5d7?q=80&w=2000&auto=format&fit=crop');
+  background-size: cover; background-position: center;
+}
+.hero h1 { font-size: clamp(36px, 5vw, 64px); margin: 0 0 10px; text-shadow: 0 2px 6px rgba(0,0,0,.5); }
+
