@@ -1,0 +1,96 @@
+.topbar { position: fixed; inset: 0 0 auto 0; height: var(--topbar); display: flex; align-items: center; gap: 12px; padding: 0 16px; z-index: 100; }
+.btn { border: 0; background: #2b211c; color: var(--parch); padding: 10px 14px; border-radius: 10px; cursor: pointer; }
+.icon-burger { width: 20px; height: 14px; position: relative; }
+.icon-burger::before, .icon-burger::after, .icon-burger span { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: var(--parch); }
+.icon-burger::before { top: 0; } .icon-burger span { top: 6px; } .icon-burger::after { bottom: 0; }
+
+.backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.6); opacity: 0; pointer-events: none; z-index: 70; }
+.backdrop.show { animation: fadeStep .35s steps(5, end) forwards; pointer-events: auto; }
+.backdrop.hide { animation: fadeStepOut .25s steps(4, end) forwards; }
+@keyframes fadeStep { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeStepOut { from { opacity: 1; } to { opacity: 0; } }
+
+aside.menu { position: fixed; inset: 0 auto 0 0; width: min(520px, 92vw); z-index: 120; pointer-events: none; }
+.menu-shell { position: absolute; inset: 0; transform: translateX(-105%) skewX(-1.5deg); will-change: transform; pointer-events: none; }
+
+.menu-panel {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background: url('assets/menu2.png') left top / cover no-repeat;
+  background-color: transparent;
+  filter: none !important;
+}
+
+aside.menu.open .menu-shell { animation: slideChoppy .38s steps(6, end) forwards; }
+aside.menu.closing .menu-shell { animation: slideChoppyOut .28s steps(5, end) forwards; }
+@keyframes slideChoppy { from { transform: translateX(-105%) skewX(-1.5deg); } to { transform: translateX(0%) skewX(0deg); } }
+@keyframes slideChoppyOut { from { transform: translateX(0%) skewX(0deg); } to { transform: translateX(-105%) skewX(-1.5deg); } }
+
+.menu-inner {
+  position: absolute; inset: 0;
+  display: grid; grid-template-rows: auto 1fr auto;
+  padding-left: clamp(24px, 3vw, 40px);
+  padding-right: clamp(46px, 6vw, 64px);
+  padding-top: 400px; /* posisi final menu */
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  font-kerning: normal;
+  font-variant-ligatures: none;
+  font-synthesis-weight: none;
+  transform: rotate(-2deg) translateY(-10px) translateX(8px);
+  transform-origin: left center;
+  font-size: 1.7rem;
+  pointer-events: auto;
+}
+
+.menu-header { padding: 0 0 10px; }
+.brand { font-weight: 800; letter-spacing: .04em; text-transform: uppercase; line-height: 1; }
+
+nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+
+.menu-item { color: #fff; text-decoration: none; font-weight: 800; letter-spacing: .03em; line-height: 1.15; display: inline-flex; align-items: center; gap: 10px; padding: 6px 0; transform: translateZ(0); }
+.menu-item::before { content: ""; flex: 0 0 6px; height: 6px; border: 2px solid #fff; border-radius: 50%; opacity: .7; display: inline-block; }
+
+.menu-footer { padding: 6px 0; font-size: 12px; opacity: .85; }
+
+/* ===== POCKET WATCH (tetep) ===== */
+.watch { position: absolute; top: 100px; left: clamp(24px, 3vw, 40px); width: 96px; aspect-ratio: 1; transform: rotate(-2deg); pointer-events: none; opacity: 0.95; }
+.watch::before { content: ""; position: absolute; left: 50%; transform: translateX(-50%); top: -14px; width: 22px; height: 10px; border-radius: 4px; background: #000; }
+.watch-face { position: relative; inset: 0; width: 100%; height: 100%; border-radius: 999px; background: #000; box-shadow: inset 0 0 4px rgba(255,0,0,0.2), 0 0 10px rgba(255,0,0,0.1); }
+.ticks { position: absolute; inset: 10%; border-radius: 999px; background:
+  conic-gradient(from 0deg,
+  rgba(180,0,0,0.9) 0 2deg, transparent 2deg 28deg,
+  rgba(180,0,0,0.9) 28deg 30deg, transparent 30deg 58deg,
+  rgba(180,0,0,0.9) 58deg 60deg, transparent 60deg 88deg,
+  rgba(180,0,0,0.9) 88deg 90deg, transparent 90deg 118deg,
+  rgba(180,0,0,0.9) 118deg 120deg, transparent 120deg 148deg,
+  rgba(180,0,0,0.9) 148deg 150deg, transparent 150deg 178deg,
+  rgba(180,0,0,0.9) 178deg 180deg, transparent 180deg 208deg,
+  rgba(180,0,0,0.9) 208deg 210deg, transparent 210deg 238deg,
+  rgba(180,0,0,0.9) 238deg 240deg, transparent 240deg 268deg,
+  rgba(180,0,0,0.9) 268deg 270deg, transparent 270deg 298deg,
+  rgba(180,0,0,0.9) 298deg 300deg, transparent 300deg 328deg,
+  rgba(180,0,0,0.9) 328deg 330deg, transparent 330deg 358deg,
+  rgba(180,0,0,0.9) 358deg 360deg); filter: drop-shadow(0 0 3px rgba(255,0,0,0.4)); }
+.roman { position: absolute; inset: 14%; font-family: 'WesternBangBang', serif; color: #111; text-shadow: 0 1px 1px rgba(255,0,0,0.1); }
+.roman span { position: absolute; left: 50%; top: 50%; transform-origin: 50% calc(50% - 36px); font-size: 10px; user-select: none; }
+.roman span:nth-child(1)  { transform: translate(-50%,-50%) rotate(0deg)   translateY(-36px) rotate(0deg); }
+.roman span:nth-child(2)  { transform: translate(-50%,-50%) rotate(30deg)  translateY(-36px) rotate(-30deg); }
+.roman span:nth-child(3)  { transform: translate(-50%,-50%) rotate(60deg)  translateY(-36px) rotate(-60deg); }
+.roman span:nth-child(4)  { transform: translate(-50%,-50%) rotate(90deg)  translateY(-36px) rotate(-90deg); }
+.roman span:nth-child(5)  { transform: translate(-50%,-50%) rotate(120deg) translateY(-36px) rotate(-120deg); }
+.roman span:nth-child(6)  { transform: translate(-50%,-50%) rotate(150deg) translateY(-36px) rotate(-150deg); }
+.roman span:nth-child(7)  { transform: translate(-50%,-50%) rotate(180deg) translateY(-36px) rotate(-180deg); }
+.roman span:nth-child(8)  { transform: translate(-50%,-50%) rotate(210deg) translateY(-36px) rotate(-210deg); }
+.roman span:nth-child(9)  { transform: translate(-50%,-50%) rotate(240deg) translateY(-36px) rotate(-240deg); }
+.roman span:nth-child(10) { transform: translate(-50%,-50%) rotate(270deg) translateY(-36px) rotate(-270deg); }
+.roman span:nth-child(11) { transform: translate(-50%,-50%) rotate(300deg) translateY(-36px) rotate(-300deg); }
+.roman span:nth-child(12) { transform: translate(-50%,-50%) rotate(330deg) translateY(-36px) rotate(-330deg); }
+.hand { position: absolute; left: 50%; top: 35%; transform-origin: 50% 85%; transform: translate(-50%, -50%) rotate(0deg); border-radius: 2px; }
+.hand.hour   { width: 4px; height: 34%; background: #b60000; }
+.hand.minute { width: 3px; height: 44%; background: #cc0000; }
+.hand.second { width: 2px; height: 46%; background: #ff0000; box-shadow: 0 0 6px rgba(255,0,0,0.6); }
+.pin { position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; transform: translate(-50%, -50%); border-radius: 50%; background: #ff0000; box-shadow: 0 0 8px rgba(255,0,0,0.8); }
+.watch-label { position: absolute; left: 50%; bottom: -14px; transform: translateX(-50%); font-size: 10px; letter-spacing: .08em; color: #ff2e2e; text-shadow: 0 0 4px rgba(255,0,0,0.6); pointer-events: none; }
+
