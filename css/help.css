@@ -1,0 +1,64 @@
+/* ====== HELP PAGE ====== */
+.page.help .page-inner{
+  width: min(1400px, 96vw);
+  margin: 80px auto 24px;
+}
+.help-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.help-card{
+  background: rgba(30,24,20,.85);
+  border: 1px solid rgba(233,220,203,.14);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(0,0,0,.3);
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+.help-card:hover{ transform: translateY(-2px); background: rgba(35,28,24,.9); box-shadow: 0 16px 40px rgba(0,0,0,.55); }
+.help-card a{ display: block; text-decoration: none; color: var(--parch); }
+.help-card .tag{ display:inline-block; font-size: 12px; opacity:.8; margin-bottom:8px; padding: 2px 8px; border: 1px solid rgba(233,220,203,.18); border-radius: 999px; }
+.help-card .title{ font-family: 'WesternBangBang', ui-serif, Georgia, serif; text-transform: uppercase; letter-spacing: .05em; margin: 6px 0 8px; }
+.help-card .desc{ font-size: 14px; opacity: .9; line-height: 1.45; }
+
+/* ==== HELP controls ==== */
+.help-controls{
+  background: rgba(30,24,20,.85);
+  border: 1px solid rgba(233,220,203,.14);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 80px auto 16px;
+  width: min(1400px, 96vw);
+  box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(0,0,0,.3);
+}
+.help-controls .row{ display:flex; gap:12px; margin-bottom:10px; }
+.help-controls .row .grow{ flex:1; }
+.help-controls label{ display:flex; flex-direction:column; gap:6px; flex:1; min-width: 200px; }
+.help-controls input, .help-controls textarea{
+  background:#1e1814; color:var(--parch);
+  border:1px solid rgba(233,220,203,.18);
+  border-radius:10px; padding:10px 12px; outline:none;
+}
+.help-controls input:focus, .help-controls textarea:focus{
+  border-color: rgba(233,220,203,.34);
+  box-shadow: 0 0 0 3px rgba(233,220,203,.08);
+}
+.help-controls .actions{ display:flex; align-items:center; gap:10px; margin-top:6px; }
+.help-controls .hint{ opacity:.7; font-size:12px; }
+
+#helpList{ width: min(1400px, 96vw); margin: 0 auto 24px; }
+
+/* Tombol aksi di kartu */
+.help-card .card-actions{
+  margin-top:10px; display:flex; gap:8px;
+}
+.help-card .btn-small{
+  border:0; background:#3a2d26; color:var(--parch);
+  padding:6px 10px; border-radius:8px; cursor:pointer;
+  font-size:12px;
+}
+.help-card .btn-small.danger{ background:#6b1f1f; }
+.help-card .btn-small:hover{ filter: brightness(1.05); }
+.help-card .title{ display:flex; justify-content:space-between; align-items:center; }
+
