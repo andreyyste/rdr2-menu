@@ -1,0 +1,62 @@
+/* === MAP specific (full page) === */
+.page.map .page-inner{
+  width: min(1400px, 96vw);
+  height: min(900px, 92vh);
+  filter: none;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 0 0 2px rgba(233,220,203,.12);
+  border-radius: 16px;
+}
+.page.map .page-inner { position: relative; overflow: hidden; touch-action: none; }
+.page.map .map-canvas{
+  position: absolute; inset: 0;
+  background: url('assets/map.jpg') center / contain no-repeat;
+  transform-origin: 50% 50%;
+  transform: scale(1);
+  will-change: transform;
+}
+
+/* ==== MAP Checklist ==== */
+#activities { width: min(1400px, 96vw); margin: 16px auto 24px; }
+#activities h2 { margin: 16px 0 10px; font-size: 20px; letter-spacing:.03em; }
+
+.todo-controls{
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  background: rgba(30,24,20,.85);
+  border: 1px solid rgba(233,220,203,.14);
+  border-radius: 12px; padding: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.35), inset 0 0 0 1px rgba(0,0,0,.25);
+}
+#todoInput{
+  flex:1; min-width: 220px;
+  background:#1e1814; color:var(--parch);
+  border:1px solid rgba(233,220,203,.18);
+  border-radius:10px; padding:10px 12px; outline:none;
+}
+#todoInput:focus{ border-color: rgba(233,220,203,.34); box-shadow: 0 0 0 3px rgba(233,220,203,.08); }
+#todoStats{ opacity:.7; font-size:12px; }
+
+.todo-list{ list-style:none; padding:0; margin: 12px 0 0; display:grid; gap:8px; }
+.todo-item{
+  display:flex; align-items:center; gap:10px;
+  background: rgba(30,24,20,.75);
+  border: 1px solid rgba(233,220,203,.12);
+  border-radius: 10px; padding: 10px 12px;
+}
+.todo-item input[type="checkbox"]{ width: 18px; height:18px; accent-color: #b60000; cursor:pointer; }
+.todo-title{
+  flex:1; line-height:1.4; user-select:none;
+}
+.todo-item.done .todo-title{ opacity:.7; text-decoration: line-through; }
+.todo-actions{ display:flex; gap:8px; }
+.btn-small{
+  border:0; background:#3a2d26; color:var(--parch);
+  padding:6px 10px; border-radius:8px; cursor:pointer; font-size:12px;
+}
+.btn-small.danger{ background:#6b1f1f; }
+.btn-small:hover{ filter: brightness(1.06); }
+
+/* === Activities section (moved from inline) === */
+#activities { min-height: auto; padding: 32px; }
+#activities h2 { margin: 0 0 12px; }
+#activities ul { line-height: 1.8; }
+
