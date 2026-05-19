@@ -1,0 +1,78 @@
+/* ==== PROGRESS PAGE ==== */
+.page.progress .page-inner{
+  width: min(1400px, 96vw);
+  margin: 80px auto 24px;
+  display: grid; gap: 16px;
+}
+.card{
+  background: rgba(30,24,20,.85);
+  border: 1px solid rgba(233,220,203,.14);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(0,0,0,.3);
+}
+.card h2{
+  margin: 0 0 12px;
+  font-family: 'WesternBangBang', ui-serif, Georgia, serif;
+  letter-spacing: .05em; text-transform: uppercase;
+}
+.progress-meta .row{ display:flex; gap:12px; margin-bottom:10px; flex-wrap: wrap; }
+.progress-meta .row.g2 .grow{ flex:1; min-width:260px; }
+.progress-meta label{ display:flex; flex-direction:column; gap:6px; }
+.progress-meta input[type="number"],
+.progress-meta input[type="range"]{
+  background:#1e1814; color:var(--parch);
+  border:1px solid rgba(233,220,203,.18);
+  border-radius:10px; padding:10px 12px;
+}
+.progress-meta input[type="range"]{ padding: 0; height: 34px; }
+.progress-meta .sks-inputs{ display:flex; align-items:center; gap:8px; }
+.progress-meta .sks-inputs input[type="number"]{ width: 120px; }
+.bar{
+  height: 14px; border-radius: 999px; overflow: hidden;
+  background: rgba(233,220,203,.12);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.4);
+  margin-top: 6px;
+}
+.bar-fill{
+  height: 100%;
+  background: linear-gradient(90deg,#7a0b0b,#b60000 40%, #ff2e2e);
+  box-shadow: 0 0 12px rgba(255,0,0,.35);
+  width: 0%;
+  transition: width .18s ease;
+}
+.tiny{ font-size:12px; opacity:.8; margin-top:4px; }
+
+.progress-ip .hdr{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:12px;
+}
+.progress-ip .ipk-box{
+  display:flex; gap:16px; flex-wrap: wrap;
+  background: rgba(0,0,0,.2); padding:8px 10px; border-radius:10px;
+  border: 1px solid rgba(233,220,203,.12);
+}
+.progress-ip .ipk-line{ font-size:14px; }
+.ip-form{ display:flex; gap:10px; flex-wrap:wrap; margin: 8px 0 12px; }
+.ip-form label{ display:flex; flex-direction:column; gap:6px; }
+.ip-form input{
+  background:#1e1814; color:var(--parch);
+  border:1px solid rgba(233,220,203,.18);
+  border-radius:10px; padding:10px 12px;
+  min-width: 120px;
+}
+.table-wrap{ overflow:auto; border-radius:12px; border:1px solid rgba(233,220,203,.14); }
+.ip-table{ width:100%; border-collapse: collapse; }
+.ip-table th, .ip-table td{
+  padding:10px 12px; border-bottom:1px solid rgba(233,220,203,.12);
+  text-align: left;
+}
+.ip-table tbody tr:hover{ background: rgba(0,0,0,.15); }
+
+.ip-actions{ display:flex; gap:8px; }
+.ip-actions .btn-small{
+  border:0; background:#3a2d26; color:var(--parch);
+  padding:6px 10px; border-radius:8px; cursor:pointer; font-size:12px;
+}
+.ip-actions .btn-small.danger{ background:#6b1f1f; }
+.ip-actions .btn-small:hover{ filter: brightness(1.06); }
+
